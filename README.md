@@ -16,14 +16,11 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
 # Installation
     Clone this repository:
 	
-	```
 	git clone https://github.com/yourusername/tls-scanner.git
 	cd tls-scanner
-	```
 	
 	Make sure you have sslscan installed:
 	
-	```
 	# On Debian/Ubuntu
 	sudo apt-get install sslscan
 
@@ -32,47 +29,38 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
 
 	# On macOS
 	brew install sslscan
-	```
 
 # Usage
 
 ## Basic Scanning
 	To scan hosts and see which ones have TLSv1.0 enabled:
 	
-	```
 	python tls_scanner.py -i targets.txt
-	```
 	
 ## Remediation Testing
 	To check remediation status (shows REMEDIATED/NOT REMEDIATED for each host):
 	
-	```
 	python tls_scanner.py -i targets.txt -r
-	```
 	
 ## Command-line Options
 
-	```
 	-i, --input          Input file with targets (required)
 	-t, --threads        Number of concurrent threads (default: 10)
 	-r, --remediation_test  Run in remediation test mode
-	```
 ## Input File Format
 	Input File Format
 	The input file should contain one target per line in the following format:
 	
-	```
 	192.168.1.1:443
 	example.com:8443
 	10.0.0.1
-	```
 	
 	If no port is specified, the default port (443) will be used.
 	
 # Output Examples
 ## Basic Scan Mode
 
-	```
+
 	[+] Loaded 5 targets from targets.txt
 	[+] Scanning 192.168.1.1:443
 	[+] Scanning 192.168.1.2:443
@@ -93,11 +81,9 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
 		- 192.168.1.2:443
 		- 192.168.1.4:443
 		- 192.168.1.5:443
-	```
-	
+ 
 ## Remediation Test Mode
 
-	```
 	[+] Loaded 5 targets from targets.txt
 	[+] Scanning 192.168.1.1:443
 	[+] Scanning 192.168.1.2:443
@@ -122,7 +108,6 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
 	[*] Total hosts scanned: 5
 	[*] Hosts with TLSv1.0 enabled: 2
 	[*] Hosts with TLSv1.0 disabled: 
-	```
 
 # License
 	MIT License
