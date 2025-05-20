@@ -2,115 +2,116 @@
 A Python tool for scanning multiple hosts to detect TLSv1.0 support and track remediation progress.
 
 # Features
-    Scan multiple hosts concurrently for TLSv1.0 support
-    Parse target lists with IP:PORT format
-    Two operation modes:
-        Basic scan mode: Shows which hosts have TLSv1.0 enabled/disabled
+Scan multiple hosts concurrently for TLSv1.0 support
+Parse target lists with IP:PORT format
+Two operation modes:
+	Basic scan mode: Shows which hosts have TLSv1.0 enabled/disabled
         Remediation test mode: Tracks remediation status of hosts
 
 # Requirements
-
-    Python 3.6+
-    sslscan command-line tool installed on your system
+Python 3.6+
+sslscan command-line tool installed on your system
 
 # Installation
-    Clone this repository:
-	
-	git clone https://github.com/yourusername/tls-scanner.git
-	cd tls-scanner
-	
-	Make sure you have sslscan installed:
-	
-	# On Debian/Ubuntu
-	sudo apt-get install sslscan
+   Clone this repository:
 
-	# On CentOS/RHEL
-	sudo yum install sslscan
+ ```
+git clone https://github.com/yourusername/tls-scanner.git
+cd tls-scanner
+```
+Make sure you have sslscan installed:
+```
+# On Debian/Ubuntu
+sudo apt-get install sslscan
 
-	# On macOS
-	brew install sslscan
+# On CentOS/RHEL
+sudo yum install sslscan
 
+# On macOS
+brew install sslscan
+```
 # Usage
-
 ## Basic Scanning
-	To scan hosts and see which ones have TLSv1.0 enabled:
-	
-	python tls_scanner.py -i targets.txt
+To scan hosts and see which ones have TLSv1.0 enabled:	
+```python tls_scanner.py -i targets.txt```
 	
 ## Remediation Testing
-	To check remediation status (shows REMEDIATED/NOT REMEDIATED for each host):
-	
-	python tls_scanner.py -i targets.txt -r
+To check remediation status (shows REMEDIATED/NOT REMEDIATED for each host):	
+```python tls_scanner.py -i targets.txt -r```
 	
 ## Command-line Options
 
-	-i, --input          Input file with targets (required)
-	-t, --threads        Number of concurrent threads (default: 10)
-	-r, --remediation_test  Run in remediation test mode
+```
+-i, --input          Input file with targets (required)
+-t, --threads        Number of concurrent threads (default: 10)
+-r, --remediation_test  Run in remediation test mode
+```
+
 ## Input File Format
-	Input File Format
-	The input file should contain one target per line in the following format:
-	
-	192.168.1.1:443
-	example.com:8443
-	10.0.0.1
-	
-	If no port is specified, the default port (443) will be used.
+Input File Format
+The input file should contain one target per line in the following format:
+
+```
+192.168.1.1:443
+example.com:8443
+10.0.0.1
+```
+
+If no port is specified, the default port (443) will be used.
 	
 # Output Examples
 ## Basic Scan Mode
 
+```
+[+] Loaded 5 targets from targets.txt
+[+] Scanning 192.168.1.1:443
+[+] Scanning 192.168.1.2:443
+[!] TLSv1.0 ENABLED on 192.168.1.1:443
+[+] Scanning 192.168.1.3:443
+[+] Scanning 192.168.1.4:443
+[+] Scanning 192.168.1.5:443
 
-	[+] Loaded 5 targets from targets.txt
-	[+] Scanning 192.168.1.1:443
-	[+] Scanning 192.168.1.2:443
-	[!] TLSv1.0 ENABLED on 192.168.1.1:443
-	[+] Scanning 192.168.1.3:443
-	[+] Scanning 192.168.1.4:443
-	[+] Scanning 192.168.1.5:443
+[✓] Scan Results:
 
-	[✓] Scan Results:
+[!] Hosts with TLSv1.0 ENABLED:
+	- 192.168.1.1:443
+	- 192.168.1.3:443
 
-	[!] Hosts with TLSv1.0 ENABLED:
-
-		- 192.168.1.1:443
-		- 192.168.1.3:443
-
-	[+] Hosts with TLSv1.0 DISABLED:
-
-		- 192.168.1.2:443
-		- 192.168.1.4:443
-		- 192.168.1.5:443
- 
+[+] Hosts with TLSv1.0 DISABLED:
+	- 192.168.1.2:443
+	- 192.168.1.4:443
+	- 192.168.1.5:443
+ ```
 ## Remediation Test Mode
 
-	[+] Loaded 5 targets from targets.txt
-	[+] Scanning 192.168.1.1:443
-	[+] Scanning 192.168.1.2:443
-	[!] TLSv1.0 ENABLED on 192.168.1.1:443
-	[+] Scanning 192.168.1.3:443
-	[+] Scanning 192.168.1.4:443
-	[+] Scanning 192.168.1.5:443
+```
+[+] Loaded 5 targets from targets.txt
+[+] Scanning 192.168.1.1:443
+[+] Scanning 192.168.1.2:443
+[!] TLSv1.0 ENABLED on 192.168.1.1:443
+[+] Scanning 192.168.1.3:443
+[+] Scanning 192.168.1.4:443
+[+] Scanning 192.168.1.5:443
 
-	[✓] Remediation Test Results:
+[✓] Remediation Test Results:
 
-	[!] Hosts with TLSv1.0 still ENABLED:
+[!] Hosts with TLSv1.0 still ENABLED:
 
-		192.168.1.1:443 - NOT REMEDIATED
-		192.168.1.3:443 - NOT REMEDIATED
+	192.168.1.1:443 - NOT REMEDIATED
+	192.168.1.3:443 - NOT REMEDIATED
 
-	[+] Hosts with TLSv1.0 disabled:
+[+] Hosts with TLSv1.0 disabled:
 
-		192.168.1.2:443 - REMEDIATED
-		192.168.1.4:443 - REMEDIATED
-		192.168.1.5:443 - REMEDIATED
+	192.168.1.2:443 - REMEDIATED
+	192.168.1.4:443 - REMEDIATED
+	192.168.1.5:443 - REMEDIATED
 
-	[*] Total hosts scanned: 5
-	[*] Hosts with TLSv1.0 enabled: 2
-	[*] Hosts with TLSv1.0 disabled: 
-
+[*] Total hosts scanned: 5
+[*] Hosts with TLSv1.0 enabled: 2
+[*] Hosts with TLSv1.0 disabled: 
+```
 # License
-	MIT License
+MIT License
 
 # Contributing
-	Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request.
