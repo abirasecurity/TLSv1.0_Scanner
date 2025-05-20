@@ -9,6 +9,7 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
         Remediation test mode: Tracks remediation status of hosts
 
 # Requirements
+
     Python 3.6+
     
     ```sslscan``` command-line tool installed on your system
