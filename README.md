@@ -11,8 +11,7 @@ A Python tool for scanning multiple hosts to detect TLSv1.0 support and track re
 # Requirements
 
     Python 3.6+
-    
-    ```sslscan``` command-line tool installed on your system
+    sslscan command-line tool installed on your system
 
 # Installation
     Clone this repository:
