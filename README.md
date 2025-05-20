@@ -33,10 +33,12 @@ brew install sslscan
 # Usage
 ## Basic Scanning
 To scan hosts and see which ones have TLSv1.0 enabled:	
+
 ```python tls_scanner.py -i targets.txt```
 	
 ## Remediation Testing
 To check remediation status (shows REMEDIATED/NOT REMEDIATED for each host):	
+
 ```python tls_scanner.py -i targets.txt -r```
 	
 ## Command-line Options
